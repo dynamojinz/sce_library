@@ -68,15 +68,15 @@ class Book(models.Model):
     _name = 'sce_library.book'
     _inherit='sce_dingtalk.mixin'
 
-    name = fields.Char(string="Book Title")
-    code = fields.Char(string="QRcode")
+    name = fields.Char(string="Book Title", required=True)
+    code = fields.Char(string="QRcode", required=True)
     sub_title = fields.Char(string="Sub Title")
     author = fields.Char()
     publisher = fields.Char()
     isbn = fields.Char()
     description = fields.Text()
-    location_id = fields.Many2one('sce_library.location')
-    kind_id = fields.Many2one('sce_library.book.kind')
+    location_id = fields.Many2one('sce_library.location', required=True)
+    kind_id = fields.Many2one('sce_library.book.kind', required=True)
     tag_ids = fields.Many2many('sce_library.book.tag', string="Tags")
     borrow_ids = fields.One2many('sce_library.book.borrow', 'book_id', copy=False)
     keeper_id = fields.Many2one('res.users')
