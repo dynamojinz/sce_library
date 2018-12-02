@@ -13,12 +13,12 @@ def get_doban_img_url(vals):
     isbn = vals.get('isbn')
     if isbn and len(isbn)==13:
         douban_url = DOUBAN_API % (isbn,)
-        print(douban_url)
+        # print(douban_url)
         douban_req = urllib.request.Request(douban_url)
         # douban_req.add_header('Content-Type', 'text/html;charset=UTF-8')
         try:
             douban_resp = urllib.request.urlopen(douban_req).read().decode()
-            print(douban_resp)
+            # print(douban_resp)
             resp = json.loads(douban_resp)
             rt = resp.get('image', None)
             if rt:
@@ -134,7 +134,7 @@ class Book(models.Model):
                 ('user_id', '=', self.keeper_id.id),
                 ('return_date', '=', False)
                 ], order='id desc')
-            print(borrow)
+            # print(borrow)
             if borrow:
                 borrow.sudo().write({
                     'return_date': fields.Datetime.context_timestamp(self, datetime.now()),
@@ -150,7 +150,7 @@ class Book(models.Model):
 
     @api.model
     def get_mybooks(self, user):
-        print(user)
+        # print(user)
         if user:
             domain = [('keeper_id', '=', user.id)]
             return self.env['sce_library.book'].search(domain)
