@@ -1,2 +1,2 @@
 # sce_library
-Library for books.
+Library in office.

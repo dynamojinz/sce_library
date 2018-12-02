@@ -1,0 +1,385 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sce_library
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-02 05:06+0000\n"
+"PO-Revision-Date: 2018-12-02 13:07+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.0.8\n"
+"Last-Translator: \n"
+"Language: zh\n"
+
+#. module: sce_library
+#: selection:sce_library.book,state:0
+msgid "Abnormal"
+msgstr "异常"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_author
+msgid "Author"
+msgstr "作者"
+
+#. module: sce_library
+#: selection:sce_library.book,state:0
+msgid "Available"
+msgstr "可借阅"
+
+#. module: sce_library
+#: model:ir.ui.view,arch_db:sce_library.book_form
+msgid "Basic Information"
+msgstr "基本信息"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_borrow_book_id
+msgid "Book"
+msgstr "图书"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_kind_name
+msgid "Book Kind"
+msgstr "图书类别"
+
+#. module: sce_library
+#: model:ir.ui.menu,name:sce_library.menu_book
+msgid "Book Management"
+msgstr "图书管理"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_name
+msgid "Book Title"
+msgstr "书名"
+
+#. module: sce_library
+#: model:ir.actions.server,name:sce_library.action_server_book
+msgid "Book.action.server"
+msgstr "图书管理"
+
+#. module: sce_library
+#: model:ir.actions.act_window,name:sce_library.action_window_book
+msgid "Book.action.window"
+msgstr "图书管理"
+
+#. module: sce_library
+#: model:ir.ui.view,arch_db:sce_library.books
+msgid "Books"
+msgstr "图书列表"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_borrow_ids
+msgid "Borrow"
+msgstr "借阅"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_borrow_borrow_date
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_borrow_date
+msgid "Borrow Date"
+msgstr "借书日期"
+
+#. module: sce_library
+#: model:ir.ui.view,arch_db:sce_library.book_form
+msgid "Borrow Information"
+msgstr "借阅信息"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_borrow_times
+msgid "Borrow Times"
+msgstr "借阅次数"
+
+#. module: sce_library
+#: selection:sce_library.book,state:0
+msgid "Borrowed"
+msgstr "借阅中"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_tag_color
+msgid "Color Index"
+msgstr "颜色"
+
+#. module: sce_library
+#: model:ir.ui.menu,name:sce_library.menu_config
+msgid "Configuration"
+msgstr "配置"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_borrow_create_uid
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_create_uid
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_kind_create_uid
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_tag_create_uid
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_location_create_uid
+msgid "Created by"
+msgstr "创建者"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_borrow_create_date
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_create_date
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_kind_create_date
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_tag_create_date
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_location_create_date
+msgid "Created on"
+msgstr "创建时间"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_description
+msgid "Description"
+msgstr "描述"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_borrow_display_name
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_display_name
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_kind_display_name
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_tag_display_name
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_location_display_name
+msgid "Display Name"
+msgstr "显示名称"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_borrow_id
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_id
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_kind_id
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_tag_id
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_location_id
+msgid "ID"
+msgstr "序号"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_image
+msgid "Image"
+msgstr "图片"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_image_url
+msgid "Image Url"
+msgstr "图片链接"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_isbn
+msgid "Isbn"
+msgstr "ISBN号"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_keeper_id
+msgid "Keeper"
+msgstr "持有者"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_kind_id_4021
+#: model:ir.ui.menu,name:sce_library.menu_kind
+msgid "Kind"
+msgstr "类别"
+
+#. module: sce_library
+#: sql_constraint:sce_library.book.kind:0
+msgid "Kind name already exists!"
+msgstr "该图书类别已存在！"
+
+#. module: sce_library
+#: model:ir.actions.act_window,name:sce_library.action_window_kind
+msgid "Kind.action.window"
+msgstr "图书类别管理"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book___last_update
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_borrow___last_update
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_kind___last_update
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_tag___last_update
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_location___last_update
+msgid "Last Modified on"
+msgstr "最新修改时间"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_borrow_write_uid
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_kind_write_uid
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_tag_write_uid
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_write_uid
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_location_write_uid
+msgid "Last Updated by"
+msgstr "最新修改人"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_borrow_write_date
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_kind_write_date
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_tag_write_date
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_write_date
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_location_write_date
+msgid "Last Updated on"
+msgstr "最新更新时间"
+
+#. module: sce_library
+#: model:ir.ui.menu,name:sce_library.menu_root
+msgid "Library"
+msgstr "图书馆"
+
+#. module: sce_library
+#: model:res.groups,name:sce_library.sce_library_admin
+msgid "Library / Administrator"
+msgstr "图书馆 / 超级管理员"
+
+#. module: sce_library
+#: model:res.groups,name:sce_library.sce_library_manager
+msgid "Library / manager"
+msgstr "图书馆 / 管理员"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_location_id
+#: model:ir.ui.menu,name:sce_library.menu_location
+msgid "Location"
+msgstr "摆放位置"
+
+#. module: sce_library
+#: sql_constraint:sce_library.location:0
+msgid "Location name already exists!"
+msgstr "该摆放位置已存在！"
+
+#. module: sce_library
+#: model:ir.actions.act_window,name:sce_library.action_window_location
+msgid "Location.action.window"
+msgstr "摆放位置管理"
+
+#. module: sce_library
+#: selection:sce_library.book,state:0
+msgid "Lost"
+msgstr "丢失"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_res_users_library_manage_loc_ids
+msgid "Manage Library Locations"
+msgstr "摆放位置管理"
+
+#. module: sce_library
+#: model:ir.ui.view,arch_db:sce_library.book_form
+msgid "Management Information"
+msgstr "管理信息"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_location_manager_ids
+msgid "Manager"
+msgstr "管理员"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_location_name
+msgid "Name"
+msgstr "名称"
+
+#. module: sce_library
+#: model:ir.ui.view,arch_db:sce_library.books
+msgid "No book defined."
+msgstr "没有找到附合条件的图书"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_borrow_overtime_date
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_overtime_date
+msgid "Overtime Date"
+msgstr "归还期限"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_publisher
+msgid "Publisher"
+msgstr "出版社"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_code
+msgid "QRcode"
+msgstr "二维码编码"
+
+#. module: sce_library
+#: sql_constraint:sce_library.book:0
+msgid "QRcode number already exists!"
+msgstr "二维码编码已被占用！"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_borrow_resume_date
+msgid "Resume Date"
+msgstr "续借日期"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_borrow_return_date
+msgid "Return Date"
+msgstr "归还日期"
+
+#. module: sce_library
+#: model:ir.module.category,name:sce_library.category_sce_library
+msgid "SCE Library"
+msgstr "中骏图书馆"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_state
+msgid "State"
+msgstr "状态"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_sub_title
+msgid "Sub Title"
+msgstr "副标题"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_tag_name
+msgid "Tag Name"
+msgstr "标签"
+
+#. module: sce_library
+#: sql_constraint:sce_library.book.tag:0
+msgid "Tag name already exists!"
+msgstr "该标签已存在！"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_tag_ids
+msgid "Tags"
+msgstr "标签列表"
+
+#. module: sce_library
+#: model:ir.model.fields,help:sce_library.field_sce_library_book_image
+msgid "This field holds the image of the book."
+msgstr "图书封面图片"
+
+#. module: sce_library
+#: model:ir.model.fields,field_description:sce_library.field_sce_library_book_borrow_user_id
+msgid "User"
+msgstr "用户"
+
+#. module: sce_library
+#: model:ir.model,name:sce_library.model_res_users
+msgid "Users"
+msgstr "用户"
+
+#. module: sce_library
+#: model:ir.model,name:sce_library.model_sce_library_book
+msgid "sce_library.book"
+msgstr "图书管理"
+
+#. module: sce_library
+#: model:ir.model,name:sce_library.model_sce_library_book_borrow
+msgid "sce_library.book.borrow"
+msgstr "图书借阅管理"
+
+#. module: sce_library
+#: model:ir.model,name:sce_library.model_sce_library_book_kind
+msgid "sce_library.book.kind"
+msgstr "图书类别管理"
+
+#. module: sce_library
+#: model:ir.model,name:sce_library.model_sce_library_book_tag
+msgid "sce_library.book.tag"
+msgstr "图书标签管理"
+
+#. module: sce_library
+#: model:ir.model,name:sce_library.model_sce_library_location
+msgid "sce_library.location"
+msgstr "摆放位置管理"
+
+#. module: sce_library
+#: model:ir.ui.view,arch_db:sce_library.book_item
+msgid "作者："
+msgstr ""
+
+#. module: sce_library
+#: model:ir.ui.view,arch_db:sce_library.book_item
+msgid "副标题："
+msgstr ""

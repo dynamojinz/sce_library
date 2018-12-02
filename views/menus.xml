@@ -1,0 +1,54 @@
+<odoo>
+  <data>
+    <!--[> Top menu item <]-->
+    <menuitem name="Library" id="sce_library.menu_root" groups="sce_library_admin,sce_library_manager"/>
+    <!--[> menu categories <]-->
+    <!--<menuitem name="Product Library" id="sce_designlib.menu_configuration" parent="sce_designlib.menu_root" sequence="70" groups="sce_designlib.designlib_admin"/>-->
+    
+
+    <!--<menuitem name="Search Product" id="sce_designlib.menu_product_search" parent="sce_designlib.menu_root"-->
+              <!--action="sce_designlib.action_url_product_search" sequence="90" groups="sce_designlib.designlib_user"/>-->
+    <!--[> actions <]-->
+    <!--<menuitem name="Standard Layer" id="sce_designlib.menu_product" parent="sce_designlib.menu_configuration"-->
+              <!--action="sce_designlib.action_window_product" sequence="10"/>-->
+
+    <!--<menuitem name="Product Type" id="sce_designlib.menu_product_type" parent="sce_designlib.menu_configuration"-->
+              <!--action="sce_designlib.action_window_product_type" sequence="20"/>-->
+
+    <!--<menuitem name="T Type" id="sce_designlib.menu_t_type" parent="sce_designlib.menu_configuration"-->
+              <!--action="sce_designlib.action_window_t_type" sequence="30"/>-->
+
+    <!--<menuitem name="Lobby" id="sce_designlib.menu_lobby" parent="sce_designlib.menu_configuration"-->
+              <!--action="sce_designlib.action_window_lobby" sequence="39"/>-->
+          
+    <!--<menuitem name="Core Type" id="sce_designlib.menu_core_type" parent="sce_designlib.menu_configuration"-->
+              <!--action="sce_designlib.action_window_core_type" sequence="40"/>-->
+
+    <!--<menuitem name="Search Config" id="sce_designlib.menu_search_config" parent="sce_designlib.menu_configuration" sequence="50" groups="sce_designlib.designlib_admin"/>-->
+    <!--[> actions <]-->
+    <!--<menuitem name="Bay Number" id="sce_designlib.menu_bay_number" parent="sce_designlib.menu_search_config"-->
+              <!--action="sce_designlib.action_window_bay_number"/>-->
+
+    <!--<menuitem name="Layout Type" id="sce_designlib.menu_layout_type" parent="sce_designlib.menu_search_config"-->
+              <!--action="sce_designlib.action_window_layout_type"/>-->
+
+    <!--<menuitem name="Area Range" id="sce_designlib.menu_area_range" parent="sce_designlib.menu_search_config"-->
+              <!--action="sce_designlib.action_window_area_range"/>-->
+    <!--[> Fault Library <]-->
+    <!--[> root <]-->
+    <!--<menuitem name="Fault Library" id="sce_designlib.menu_root_fault" groups="sce_designlib.designlib_user"/>-->
+    <!--[> backend <]-->
+    <menuitem name="Book Management" id="sce_library.menu_book" parent="sce_library.menu_root" sequence="10" 
+        action="sce_library.action_server_book"/>
+    <menuitem name="Configuration" id="sce_library.menu_config" parent="sce_library.menu_root" sequence="99" groups="sce_library_admin"/>
+    <menuitem name="Location" id="sce_library.menu_location" parent="sce_library.menu_config" sequence="20" 
+        action="sce_library.action_window_location"/>
+    <menuitem name="Kind" id="sce_library.menu_kind" parent="sce_library.menu_config" sequence="30" 
+        action="sce_library.action_window_kind"/>
+    <!--[> frontend <]-->
+    <!--<menuitem name="Search Fault" id="sce_designlib.menu_fault_search" parent="sce_designlib.menu_root_fault"-->
+              <!--action="sce_designlib.action_url_fault_search" sequence="90"/>-->
+    <!--<menuitem name="Falut Type" id="sce_designlib.menu_fault_type" parent="sce_designlib.menu_fault_config" sequence="10" -->
+        <!--action="sce_designlib.action_window_fault_type"/>-->
+  </data>
+</odoo>

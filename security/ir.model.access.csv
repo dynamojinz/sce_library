@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+acc_sce_library_book,sce_library.book,model_sce_library_book,,1,0,0,0
+acc_sce_library_book_tag,sce_library.book.tag,model_sce_library_book_tag,,1,0,0,0
+acc_sce_library_location,sce_library.location,model_sce_library_location,,1,0,0,0
+acc_sce_library_book_kind,sce_library.book.kind,model_sce_library_book_kind,,1,0,0,0
+acc_sce_library_book_borrow,sce_library.book.borrow,model_sce_library_book_borrow,,1,0,0,0
+man_sce_library_book,man_sce_library.book,model_sce_library_book,sce_library_manager,1,1,1,1
+man_sce_library_book_tag,man_sce_library.book.tag,model_sce_library_book_tag,sce_library_manager,1,1,1,1
+man_sce_library_book_borrow,man_sce_library.book.borrow,model_sce_library_book_borrow,sce_library_manager,1,1,1,1
+adm_sce_library_location,adm_sce_library.location,model_sce_library_location,sce_library_admin,1,1,1,1
+adm_sce_library_book_kind,adm_sce_library.book.kind,model_sce_library_book_kind,sce_library_admin,1,1,1,1
