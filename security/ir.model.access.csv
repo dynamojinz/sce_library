@@ -9,3 +9,4 @@ man_sce_library_book_tag,man_sce_library.book.tag,model_sce_library_book_tag,sce
 man_sce_library_book_borrow,man_sce_library.book.borrow,model_sce_library_book_borrow,sce_library_manager,1,1,1,1
 adm_sce_library_location,adm_sce_library.location,model_sce_library_location,sce_library_admin,1,1,1,1
 adm_sce_library_book_kind,adm_sce_library.book.kind,model_sce_library_book_kind,sce_library_admin,1,1,1,1
+adm_sce_library_res_users,adm_sce_library.res.users,model_res_users,sce_library_admin,0,0,1,1
