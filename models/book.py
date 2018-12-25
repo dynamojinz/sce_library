@@ -2,12 +2,13 @@
 
 from odoo import models, fields, api
 from odoo import tools, _
-import urllib.request, json,base64
+import urllib.request, json,base64,time
 from urllib.error import HTTPError
 from datetime import datetime, timedelta
 BORROWDAYS = 14
 DOUBAN_API = "https://api.douban.com/v2/book/isbn/%s"
 BORROWLIMIT = 1
+RESUMEDAYS = 14
 
 def get_doban_img_url(vals):
     isbn = vals.get('isbn')
@@ -38,17 +39,21 @@ class BookTag(models.Model):
 
 class BookKind(models.Model):
     _name = 'sce_library.book.kind'
+    _order = 'sequence'
+
     name = fields.Char('Book Kind', required=True)
+    sequence = fields.Integer()
     _sql_constraints = [
             ('name_uniq', 'unique (name)', "Kind name already exists!"),
             ]
 
 class BookLocation(models.Model):
     _name = 'sce_library.location'
+    _order = 'sequence'
 
     name = fields.Char()
     manager_ids = fields.Many2many('res.users')
-
+    sequence = fields.Integer()
     # Constaints
     _sql_constraints = [
             ('name_uniq', 'unique (name)', "Location name already exists!"),
@@ -62,7 +67,7 @@ class BookBorrow(models.Model):
     borrow_date = fields.Datetime()
     overtime_date = fields.Datetime()
     return_date = fields.Datetime()
-    resume_date = fields.Datetime()
+    resume_date = fields.Datetime()   # 没用到
 
 class Book(models.Model):
     _name = 'sce_library.book'
@@ -83,6 +88,7 @@ class Book(models.Model):
     borrow_date = fields.Date()
     overtime_date = fields.Date()
     borrow_times = fields.Integer(default=0, read_only=True)
+    resume_times = fields.Integer(default=1)
     # 图片
     image = fields.Binary('Image', attachment=True,
             help="This field holds the image of the book.")
@@ -93,15 +99,44 @@ class Book(models.Model):
         ('borrowed','Borrowed'),
         ('abnormal','Abnormal'),
         ('lost','Lost'),
-        ], default='available')
+        ], default='available') # 默认可借阅
     # Constaints
     _sql_constraints = [
+        # (约束名， 约束表达式， 错误提示信息)
             ('code_uniq', 'unique (code)', "QRcode number already exists!"),
             ]
-
+    def resume(self, authCode):
+        user = self.dingtalk_get_user(authCode)
+        if user and self.state == 'borrowed':
+            record = self.env['sce_library.book.borrow'].search([
+                ('book_id', '=', self.id),
+                ('user_id', '=', self.keeper_id.id),
+                ('return_date', '=', False)
+            ], order='id desc')
+            resume_date = datetime.strptime(record.overtime_date,'%Y-%m-%d %H:%M:%S')+timedelta(days=RESUMEDAYS)
+            # print(record.overtime_date)
+            # resume_date = datetime.strptime(record.overtime_date,'%Y-%m-%d')+timedelta(days=RESUMEDAYS)
+            record.sudo().write({
+                'overtime_date': fields.Datetime.context_timestamp(self, resume_date)
+            })
+            self.sudo().write({
+                'resume_times':0,
+            })
+            keeper = self.sudo().keeper_id.login.split("@")[0]
+            # print('续期')
+            # print(keeper)
+            overtime_date = record.overtime_date[:10]
+            title = ("续借成功：")
+            markdown = ("## 续借成功：\n- 书名: 《%s》\n- 请于 %s 前至该楼层管理员处归还本书，谢谢！") % (self.name, overtime_date)
+            redirect = "eapp://pages/mybook/mybook?query"
+            self.dingtalk_send_action_card_message(keeper, title, markdown, redirect)
+            result = {'status':'ok','overtime_date':overtime_date, 'resume':self.resume_times}
+        else:
+            result = {'status':'failed','reason':'No user or wrong state'}
+        return result
     # Borrow with Dingtalk authcode
     def borrow(self, authcode):
-        user = self.dingtalk_get_user(authcode)
+        user = self.dingtalk_get_user(authcode)  # user = res.users(7,)
         mybooks = self.get_mybooks(user)
         if len(mybooks) >= BORROWLIMIT:
             return 'overlimit'
@@ -122,9 +157,18 @@ class Book(models.Model):
                     'overtime_date': rt.overtime_date,
                     'borrow_times': self.borrow_times+1,
                     })
+                keeper = self.sudo().keeper_id.login.split("@")[0]
+                # print('借书人')
+                # print(keeper)
+                # print(self.keeper_id)
+                # print(user.id)
+                overtime_date = rt.overtime_date[:10]
+                title = ("借书成功:")
+                markdown = ("## 借书成功:\n- 书名: 《%s》\n- 请于 %s 前至该楼层管理员处归还本书，谢谢！") % (self.name, overtime_date)
+                redirect = "eapp://pages/mybook/mybook?query"
+                self.dingtalk_send_action_card_message(keeper, title, markdown, redirect)
                 return 'ok'
         return False
-
     # Return with Dingtalk authcode
     def return_book(self, authcode):
         user = self.dingtalk_get_user(authcode)
@@ -134,8 +178,9 @@ class Book(models.Model):
                 ('user_id', '=', self.keeper_id.id),
                 ('return_date', '=', False)
                 ], order='id desc')
-            # print(borrow)
+            # print(borrow) #sce_library.book.borrow(15,)
             if borrow:
+                keeper = self.sudo().keeper_id.login.split("@")[0]
                 borrow.sudo().write({
                     'return_date': fields.Datetime.context_timestamp(self, datetime.now()),
                     })
@@ -144,10 +189,21 @@ class Book(models.Model):
                     'keeper_id': False,
                     'borrow_date': False,
                     'overtime_date': False,
+                    'resume_times':1,
                     })
+                # title = _("Return a book successfully!")
+                # markdown = _("## You have return a book:\n- Name: %s\n- return_date: %s") % (
+                # self.name, borrow.return_date)
+                # redirect = ""
+                message = ("成功归还《%s》，谢谢！" % (self.name))
+                # print(0)
+                # print(message)
+                # self.sudo().dingtalk_send_message(user.login.split("@")[0],message)
+                self.sudo().dingtalk_send_message(keeper,message)
                 return True
         return False
 
+    # self代表模型本身，不代表任何记录
     @api.model
     def get_mybooks(self, user):
         # print(user)
@@ -167,8 +223,26 @@ class Book(models.Model):
         get_doban_img_url(vals)
         return super(Book,self).write(vals)
 
+    @api.model
+    def test_task(self):
+        print('定时任务测试 哈哈哈')
 
-
+    @api.model
+    def reminder(self):
+        # print('-----定时任务开始-----')
+        domain = [('overtime_date', '!=', False)]
+        records = self.env['sce_library.book'].search(domain)
+        for record in records:
+            overtime_date = datetime.strptime(record.sudo().overtime_date,'%Y-%m-%d')
+            keeper = record.sudo().keeper_id.login.split('@')[0]
+            # print(keeper)
+            now = datetime.now()
+            interval_day = overtime_date - now
+            if interval_day.days <= 3:
+                title = ("到期提醒:")
+                markdown = ("## 到期提醒:\n- 书名: 《%s》\n- 请于 %s 前至该楼层管理员处还书，谢谢！") % (record.name, record.sudo().overtime_date[:10])
+                redirect = "eapp://pages/mybook/mybook?query"
+                self.dingtalk_send_action_card_message(keeper, title, markdown, redirect)
     # def action_publish(self):
         # # message = _("A new fault was published:\nSN:%s\nType:%s\nTitle:%s") % (self.name, self.type_id.name, self.title)
         # title = _("A new fault was published")

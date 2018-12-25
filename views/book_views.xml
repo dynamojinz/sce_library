@@ -14,6 +14,9 @@
           <field name="kind_id"/>
           <field name="location_id"/>
           <field name="state"/>
+          <field name="keeper_id"/>
+          <field name="overtime_date"/>
+          <!--<field name="resume_times"/>-->
         </tree>
       </field>
     </record>
@@ -110,13 +113,34 @@
       </field>
     </record>
 
-    <record model="ir.actions.act_window" id="sce_library.action_window_location">
+
+  <record model="ir.ui.view" id="sce_library.location_list">
+      <field name="name">location.list</field>
+      <field name="model">sce_library.location</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="sequence" widget="handle"/>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+  <record model="ir.actions.act_window" id="sce_library.action_window_location">
         <field name="name">Location.action.window</field>
       <field name="res_model">sce_library.location</field>
       <field name="view_mode">tree,form</field>
     </record>
 
-    <record model="ir.actions.act_window" id="sce_library.action_window_kind">
+      <record model="ir.ui.view" id="sce_library.kind_list">
+          <field name="name">kind.list</field>
+          <field name="model">sce_library.book.kind</field>
+          <field name="arch" type="xml">
+              <tree>
+                  <field name="sequence" widget="handle"/>
+                  <field name="name"/>
+              </tree>
+          </field>
+      </record>
+  <record model="ir.actions.act_window" id="sce_library.action_window_kind">
         <field name="name">Kind.action.window</field>
       <field name="res_model">sce_library.book.kind</field>
       <field name="view_mode">tree,form</field>

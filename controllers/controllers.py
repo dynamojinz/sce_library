@@ -5,6 +5,8 @@ from odoo.addons.website.controllers.main import QueryURL
 from datetime import datetime, timedelta
 PPG = 20  # Fault Per Page
 BORROWDAYS = 14
+RENEWDAYS = 7
+# RESUME = 1
 
 # from odoo.addons.website.controllers.main import QueryURL
 
@@ -52,7 +54,6 @@ class SceLibraryBookController(http.Controller):
 
         # print(domain)
         Book = request.env['sce_library.book']
-
         parent_category_ids = []
 
         book_count = Book.search_count(domain)
@@ -89,15 +90,35 @@ class SceLibraryBookController(http.Controller):
         return {'status': 'failed', 'reason':'unknown'}
 
     @http.route([
+        '/rpc/sce_library/book/resume',
+    ], auth="public", type='json', website=True, csrf=False)
+    def rpc_book_resume(self, code=None, authcode=None, **post):
+        if code and authcode:
+            domain = [('code','=',code)]
+            book = request.env['sce_library.book'].search(domain)
+            if book:
+                rt = book.resume(authcode)
+                if rt=='ok':
+                    return {'status': 'ok'}
+                elif rt=='overlimit':
+                    return {'status': 'failed', 'reason': 'overlimit'}
+                elif rt=='borrowed':
+                    return {'status': 'failed', 'reason': 'borrowed'}
+        return {'status': 'failed', 'reason':'unknown'}
+
+    @http.route([
         '/rpc/sce_library/book',
         '/rpc/sce_library/book/<int:bookid>',
         '/rpc/sce_library/book/code/<bookcode>',
     ], auth="public", type='json', website=True, csrf=False)
     def rpc_book_list(self, search='', bookid=None, bookcode=None, limit=PPG, kind_id=0, loc_id=0, order=None, keyword=None, **post):
+        # self.env[ < model name >]
         Book = request.env['sce_library.book']
+        # print(Book)   #sce_library.book()
+        # print(type(Book))   #<class 'odoo.api.sce_library.book'>
         Kind = request.env['sce_library.book.kind']
         Location = request.env['sce_library.location']
-
+        # 借书逻辑
         if bookid or bookcode:
             book = None
             if bookid:
@@ -105,7 +126,7 @@ class SceLibraryBookController(http.Controller):
             else:
                 book = Book.search([('code','=',bookcode)]).sudo()
             bookinfo = None
-            if book:
+            if book: # 若找到相关记录，填写bookinfo
                 bookinfo = {
                         'id': book.id,
                         'kind': book.kind_id.name,
@@ -118,6 +139,7 @@ class SceLibraryBookController(http.Controller):
                         'state': book.state,
                         'image': book.image_url,
                         }
+                # 可借阅状态，更新bookinfo
                 if book.state == 'available':
                     bookinfo.update({
                             'borrow_date': fields.Date.context_today(book, datetime.now()),
@@ -130,9 +152,10 @@ class SceLibraryBookController(http.Controller):
                             'overtime_date': book.overtime_date,
                             'return_date': fields.Date.context_today(book, datetime.now()),
                             })
-            result = { 'bookinfo': bookinfo }
-        else: 
+            result = {'bookinfo': bookinfo }
+        else:   # 搜索逻辑
             domain=[('state','=','available'),]
+            # 判断用户是否选中条件搜索，有则添加至domain列表
             if kind_id:
                 domain.append(('kind_id','=',kind_id))
             if loc_id:
@@ -152,6 +175,7 @@ class SceLibraryBookController(http.Controller):
                         'publisher': book.publisher,
                         'location': book.location_id.name,
                         'image': book.image_url,
+                        'code': book.code
                     }
                     for book in books]
             result = {
@@ -162,7 +186,25 @@ class SceLibraryBookController(http.Controller):
             }
         return result
 
-
+    # 续借
+    @http.route([
+        '/rpc/sce_library/book/mybook/resume',
+    ], auth="public", type='json', website=True, csrf=False)
+    def rpc_mybook_resume(self, bookid=0, authCode=None, **post):
+        if bookid != 0:
+            Book = request.env['sce_library.book']  # sce_library.book()
+            # 获取该记录
+            book = Book.browse(bookid)
+            if authCode:
+                print(authCode)
+                result = book.resume(authCode)
+                print(result)
+                # book = Book.search([('borrows_id', '=', bookid)]).sudo()
+                return result
+            else:
+                return{'status':'failed', 'reason':'Pls check with authcode'}
+        else:
+            return {'status':'failed', 'reason':'Pls check with bookid'}
     @http.route([
         '/rpc/sce_library/book/mybook',
     ], auth="public", type='json', website=True, csrf=False)
@@ -182,9 +224,12 @@ class SceLibraryBookController(http.Controller):
                         'borrow_date': book.borrow_date,
                         'overtime_date': book.overtime_date,
                         'image': book.image_url,
+                        'resume':book.resume_times,
                     }
                     for book in mybooks]
             is_manager = False
+            # for book in mybooks:
+            #     resume = book.resume_times
             if user.library_manage_loc_ids:
                 is_manager = True
             return {'mybooks': mybook_values, 'is_manager': is_manager}
