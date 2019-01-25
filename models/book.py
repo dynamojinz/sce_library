@@ -121,6 +121,7 @@ class Book(models.Model):
             })
             self.sudo().write({
                 'resume_times':0,
+                'overtime_date': fields.Datetime.context_timestamp(self, resume_date)
             })
             keeper = self.sudo().keeper_id.login.split("@")[0]
             # print('续期')
