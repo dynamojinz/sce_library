@@ -4,8 +4,8 @@ from odoo.http import request
 from odoo.addons.website.controllers.main import QueryURL
 from datetime import datetime, timedelta
 PPG = 20  # Fault Per Page
-BORROWDAYS = 14
-RENEWDAYS = 7
+BORROWDAYS = 30
+RENEWDAYS = 15
 # RESUME = 1
 
 # from odoo.addons.website.controllers.main import QueryURL

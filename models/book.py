@@ -5,10 +5,10 @@ from odoo import tools, _
 import urllib.request, json,base64,time
 from urllib.error import HTTPError
 from datetime import datetime, timedelta
-BORROWDAYS = 14
+BORROWDAYS = 30
 DOUBAN_API = "https://api.douban.com/v2/book/isbn/%s"
 BORROWLIMIT = 1
-RESUMEDAYS = 14
+RESUMEDAYS = 15
 
 def get_doban_img_url(vals):
     isbn = vals.get('isbn')
